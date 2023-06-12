@@ -15,6 +15,15 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'fullname'     => 'required',
+            'email'     => 'required|email',
+            'telp'   => 'required|min:10',
+            'address'     => 'required',
+            'event_name'     => 'required',
+            'ticket_type'     => 'required',
+            'amount'     => 'required'
+        ]);
 
        $query = DB::table('orders')->insert([
             'order_id' => time(),
