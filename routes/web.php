@@ -20,6 +20,8 @@ Route::get('/', function () {
 });
 
 Route::get('/order/ticket', [OrderController::class, 'index'])->name('order.index');
+Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
+Route::get('/order/{id}/show', [OrderController::class, 'show'])->name('order.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

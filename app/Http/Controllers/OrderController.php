@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -13,11 +15,26 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        dd("data");
+
+       $query = DB::table('orders')->insert([
+            'order_id' => time(),
+            'name' => $request->fullname,
+            'email' => $request->email,
+            'telp' => $request->telp,
+            'address' => $request->address,
+            'event_name' => $request->event_name,
+            'ticket_type' => $request->ticket_type,
+            'amount' => $request->amount,
+            'created_at' => Carbon::now()
+        ]);
+
+        return redirect()->route('order.show', DB::getPdo()->lastInsertId());
     }
 
     public function show($id)
     {
+        $order = DB::table('orders')->find($id);
 
+        return view('print', compact('order'));
     }
 }

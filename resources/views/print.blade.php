@@ -200,24 +200,23 @@ h1 {
                         <article class="card fl-left">
                           <section class="date">
                             <time datetime="23th feb">
-                              <span>23</span><span>feb</span>
+                              <span>{{\Carbon\Carbon::parse($order->created_at)->format('d')}}</span><span>{{\Carbon\Carbon::parse($order->created_at)->format('M')}}</span>
                             </time>
                           </section>
                           <section class="card-cont">
-                            <small>Order id :</small>
-                            <h3>Event Name :</h3>
+                            <span>Order id : {{ $order->order_id }}</span><br>
+                            <span>Event Name : {{ $order->event_name }}</span>
+                            <div class="even-info">
+                                <i class="fa fa-map-marker"></i>
+                                <p>
+                                   Address : {{ $order->address }}
+                                </p>
+                              </div>
                             <div class="even-date">
                              <i class="fa fa-calendar"></i>
                              <time>
-                               <span>Amount : </span>
-                               <span>08:55pm to 12:00 am</span>
+                               <span>Amount :  {{ $order->amount }} </span>
                              </time>
-                            </div>
-                            <div class="even-info">
-                              <i class="fa fa-map-marker"></i>
-                              <p>
-                                Address
-                              </p>
                             </div>
                             <a href="#">tickets</a>
                           </section>

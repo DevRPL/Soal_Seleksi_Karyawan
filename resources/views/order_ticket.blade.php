@@ -14,7 +14,7 @@
             <div class="col-md-12">
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label class="font-weight-bold">Fullname</label>
@@ -66,10 +66,10 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Event Name</label>
-                                <input type="text" class="form-control @error('even_name') is-invalid @enderror" name="even_name" value="{{ old('even_name') }}" placeholder="Event Name">
+                                <input type="text" class="form-control @error('event_name') is-invalid @enderror" name="event_name" value="{{ old('event_name') }}" placeholder="Event Name">
 
                                 <!-- error message untuk title -->
-                                @error('amount')
+                                @error('event_name')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
@@ -78,14 +78,14 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold"> Ticket Type</label>
-                                <select  class="form-control class="form-select" aria-label="Default select example">
+                                <select name="ticket_type" class="form-control class="form-select" aria-label="Default select example">
                                     <option selected>Select Type Ticket</option>
-                                    <option name="type_ticket" value="vip_1">VIP 1</option>
-                                    <option name="type_ticket" value="vip_2">Vip 2</option>
+                                    <option name="ticket_type" value="vip_1">VIP 1</option>
+                                    <option name="ticket_type" value="vip_2">Vip 2</option>
                                 </select>
 
                                 <!-- error message untuk title -->
-                                @error('amount')
+                                @error('ticket_type')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
@@ -94,7 +94,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Amount</label>
-                                <input type="number" min="1" class="form-control @error('amount') is-invalid @enderror" name="amount" value="{{ old('amount') }}" placeholder="Phone">
+                                <input type="number" min="1" class="form-control @error('amount') is-invalid @enderror" name="amount" value="{{ old('amount') }}" placeholder="Amount">
 
                                 <!-- error message untuk title -->
                                 @error('amount')
