@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/order/tickets', [OrderController::class, 'getAllOrder'])->name('order.getAllOrder');
     Route::get('/check/order/tickets', [OrderController::class, 'checkOrder'])->name('order.checkOrder');
     Route::post('/check/data-order/tickets', [OrderController::class, 'checkDataOrder'])->name('order.checkDataOrder');
+
+    Route::get('/data-report-order', [OrderController::class, 'reportOrder'])->name('order.reportOrder');
 });
 
 require __DIR__.'/auth.php';

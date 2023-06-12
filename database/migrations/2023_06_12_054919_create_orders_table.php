@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('event_name');
             $table->string('ticket_type');
             $table->integer('amount');
+            $table->integer('status', 0);
             $table->timestamps();
         });
     }

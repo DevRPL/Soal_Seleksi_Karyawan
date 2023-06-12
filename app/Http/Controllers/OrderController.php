@@ -25,7 +25,7 @@ class OrderController extends Controller
             'amount'     => 'required'
         ]);
 
-       $query = DB::table('orders')->insert([
+       DB::table('orders')->insert([
             'order_id' => time(),
             'name' => $request->fullname,
             'email' => $request->email,
@@ -34,7 +34,8 @@ class OrderController extends Controller
             'event_name' => $request->event_name,
             'ticket_type' => $request->ticket_type,
             'amount' => $request->amount,
-            'created_at' => Carbon::now()
+            'created_at' => Carbon::now(),
+            'status' => 0
         ]);
 
         return redirect()->route('order.show', DB::getPdo()->lastInsertId());
@@ -64,8 +65,34 @@ class OrderController extends Controller
     {
 
         $orders = DB::table('orders')
-            ->where('order_id', $request->order_id)->get();
+            ->where('order_id', $request->order_id)
+            ->get();
 
-        return view('check_data_order_list', compact('orders'));
+        if ($orders[0]->status == 0) {
+                DB::table('orders')
+                    ->where('order_id', $request->order_id)
+                    ->update([
+                        'status' => 1
+                    ]);
+                $orders = DB::table('orders')
+                    ->where('order_id', $request->order_id)
+                    ->where('status', '=', 1)
+                    ->get();
+
+                return view('check_data_order_list', compact('orders'));
+            } else {
+                $orders = DB::table('orders')
+                ->where('order_id', $request->order_id)
+                ->where('status', '=', 0)
+                ->get();
+                return view('check_data_order_list', compact('orders'));
+            }
+    }
+
+    public function reportOrder()
+    {
+        $orders = DB::table('orders')->get();
+
+        return view('report', compact('orders'));
     }
 }
