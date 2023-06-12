@@ -68,25 +68,25 @@ class OrderController extends Controller
             ->where('order_id', $request->order_id)
             ->get();
 
-        if ($orders[0]->status == 0) {
-                DB::table('orders')
-                    ->where('order_id', $request->order_id)
-                    ->update([
-                        'status' => 1
-                    ]);
-                $orders = DB::table('orders')
-                    ->where('order_id', $request->order_id)
-                    ->where('status', '=', 1)
-                    ->get();
-
-                return view('check_data_order_list', compact('orders'));
-            } else {
-                $orders = DB::table('orders')
+        if (count($orders) > 0 && $orders[0]->status == 0) {
+            DB::table('orders')
                 ->where('order_id', $request->order_id)
-                ->where('status', '=', 0)
+                ->update([
+                    'status' => 1
+                ]);
+            $orders = DB::table('orders')
+                ->where('order_id', $request->order_id)
+                ->where('status', '=', 1)
                 ->get();
-                return view('check_data_order_list', compact('orders'));
-            }
+
+            return view('check_data_order_list', compact('orders'));
+        } else {
+            $orders = DB::table('orders')
+            ->where('order_id', $request->order_id)
+            ->where('status', '=', 0)
+            ->get();
+            return view('check_data_order_list', compact('orders'));
+        }
     }
 
     public function reportOrder()
