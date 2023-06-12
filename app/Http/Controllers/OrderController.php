@@ -51,8 +51,21 @@ class OrderController extends Controller
     {
         $orders = DB::table('orders')->get();
 
-        return view('ordere_list', compact('orders'));
+        return view('order_list', compact('orders'));
+    }
+
+    public function checkOrder()
+    {
+        return view('check_order_list');
     }
 
 
+    public function checkDataOrder(Request $request)
+    {
+
+        $orders = DB::table('orders')
+            ->where('order_id', $request->order_id)->get();
+
+        return view('check_data_order_list', compact('orders'));
+    }
 }

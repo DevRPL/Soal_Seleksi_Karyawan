@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/order/tickets', [OrderController::class, 'getAllOrder'])->name('order.getAllOrder');
+    Route::get('/check/order/tickets', [OrderController::class, 'checkOrder'])->name('order.checkOrder');
+    Route::post('/check/data-order/tickets', [OrderController::class, 'checkDataOrder'])->name('order.checkDataOrder');
 });
 
 require __DIR__.'/auth.php';
