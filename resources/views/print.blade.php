@@ -218,7 +218,7 @@ h1 {
                                <span>Amount :  {{ $order->amount }} </span>
                              </time>
                             </div>
-                            <a href="#">tickets</a>
+                            <a href="{{ route('dashboard') }}">tickets</a>
                           </section>
                         </article>
                       </div>

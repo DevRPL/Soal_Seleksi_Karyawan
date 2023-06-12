@@ -41,7 +41,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Telp</label>
+                                <label class="font-weight-bold">Phone</label>
                                 <input type="text" class="form-control @error('telp') is-invalid @enderror" name="telp" value="{{ old('telp') }}" placeholder="Phone">
 
                                 <!-- error message untuk title -->

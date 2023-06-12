@@ -46,4 +46,13 @@ class OrderController extends Controller
 
         return view('print', compact('order'));
     }
+
+    public function getAllOrder()
+    {
+        $orders = DB::table('orders')->get();
+
+        return view('ordere_list', compact('orders'));
+    }
+
+
 }
