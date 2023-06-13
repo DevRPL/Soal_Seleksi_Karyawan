@@ -78,8 +78,8 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold"> Ticket Type</label>
-                                <select name="ticket_type" class="form-control class="form-select" aria-label="Default select example">
-                                    <option selected>Select Type Ticket</option>
+                                <select name="ticket_type" class="form-control">
+                                    <option value="">Select Type Ticket</option>
                                     <option name="ticket_type" value="vip_1">VIP 1</option>
                                     <option name="ticket_type" value="vip_2">Vip 2</option>
                                 </select>
