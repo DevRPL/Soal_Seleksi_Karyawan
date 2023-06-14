@@ -34,8 +34,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/order/tickets', [OrderController::class, 'getAllOrder'])->name('order.getAllOrder');
     Route::get('/check/order/tickets', [OrderController::class, 'checkOrder'])->name('order.checkOrder');
     Route::post('/check/data-order/tickets', [OrderController::class, 'checkDataOrder'])->name('order.checkDataOrder');
-
+    Route::delete('/orders/{id}', [OrderController::class, 'destroy'])->name('orders.destroy');
     Route::get('/data-report-order', [OrderController::class, 'reportOrder'])->name('order.reportOrder');
+    Route::put('order/tickets/{id}', [OrderController::class, 'update'])->name('order.update');
+    Route::get('order/tickets/{id}/edit', [OrderController::class, 'edit'])->name('order.edit');
 });
 
 require __DIR__.'/auth.php';

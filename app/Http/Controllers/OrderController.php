@@ -13,6 +13,13 @@ class OrderController extends Controller
         return view('order_ticket');
     }
 
+    public function edit($id)
+    {
+        $order = DB::table('orders')->find($id);
+
+        return view('edit', compact('order'));
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -60,6 +67,22 @@ class OrderController extends Controller
         return view('check_order_list');
     }
 
+    public function update(Request $request, $id)
+    {
+       DB::table('orders')->where('id', '=', $id)->update([
+            'name' => $request->fullname,
+            'email' => $request->email,
+            'telp' => $request->telp,
+            'address' => $request->address,
+            'event_name' => $request->event_name,
+            'ticket_type' => $request->ticket_type,
+            'amount' => $request->amount,
+            'updated_at' => Carbon::now(),
+        ]);
+
+        return redirect()->route('order.getAllOrder');
+
+    }
 
     public function checkDataOrder(Request $request)
     {
@@ -94,5 +117,14 @@ class OrderController extends Controller
         $orders = DB::table('orders')->get();
 
         return view('report', compact('orders'));
+    }
+
+
+
+    public function destroy($id)
+    {
+        DB::table('orders')->where('id', '=', $id)->delete();
+
+        return redirect()->back();
     }
 }
